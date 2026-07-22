@@ -18,6 +18,11 @@ Repository = "https://github.com/sehnryr/get-oodle-lib"
 [project.scripts]
 get-oodle-lib = "get_oodle_lib.__main__:main"
 
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
 [tool.uv.sources]
 parse-commit-gitdeps-xml = { workspace = true }
 
