@@ -36,3 +36,7 @@ Either use the Nix flake development shell or install python and uv manually, th
 uv sync
 uv run get-oodle-lib --help
 ```
+
+## License
+
+This project and its packages are licensed under either of [`Apache License 2.0`](LICENSE-APACHE) or [`MIT License`](LICENSE-MIT) at your option.
