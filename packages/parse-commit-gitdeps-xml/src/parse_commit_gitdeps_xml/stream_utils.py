@@ -4,51 +4,46 @@ from typing import IO
 
 class StreamUtils:
     __stream: IO[bytes]
-    __buffer_size: int = 1024 * 8
+    __buffer_size: int
 
-    def __init__(self, stream: IO[bytes]):
+    def __init__(self, stream: IO[bytes], buffer_size: int = 1024 * 8):
         self.__stream = stream
-
-    def __st_size(self) -> int:
-        initial_position = self.__stream.tell()
-        self.__stream.seek(0, os.SEEK_END)
-        size = self.__stream.tell()
-        self.__stream.seek(initial_position)
-        return size
+        self.__buffer_size = buffer_size
 
     def read_until(self, pattern: bytes) -> bytes:
-        buffer = self.__stream.read(self.__buffer_size)
-        if not buffer:
-            return buffer
+        carry_len = len(pattern) - 1
 
-        iterations = 0
-        last_chunk_size = len(buffer)
-        while pattern not in buffer[iterations * self.__buffer_size :]:
-            iterations += 1
+        buf = self.__stream.read(self.__buffer_size)
+        if not buf:
+            return buf
+
+        view = buf
+        while pattern not in view:
             chunk = self.__stream.read(self.__buffer_size)
-            last_chunk_size = len(chunk)
-            buffer += chunk
-            if last_chunk_size < self.__buffer_size:
-                return buffer
+            if not chunk:
+                return buf
 
-        pattern_index = buffer[iterations * self.__buffer_size :].find(pattern)
-        self.__stream.seek(
-            -(last_chunk_size - pattern_index - len(pattern)), os.SEEK_CUR
-        )
-        return buffer[: iterations * self.__buffer_size + pattern_index]
+            view = buf[-carry_len:] + chunk if carry_len else chunk
+            buf += chunk
+
+        self.__stream.seek(-len(view) + view.find(pattern) + len(pattern), os.SEEK_CUR)
+        return buf[: -1 - len(view) + view.find(pattern) + len(pattern)]
 
     def consume_until(
         self,
         pattern: bytes,
     ) -> None:
-        buffer = self.__stream.read(self.__buffer_size)
-        if not buffer:
+        carry_len = len(pattern) - 1
+
+        buf = self.__stream.read(self.__buffer_size)
+        if not buf:
             return
 
-        while pattern not in buffer:
-            buffer = self.__stream.read(self.__buffer_size)
-            if not buffer:
+        while pattern not in buf:
+            chunk = self.__stream.read(self.__buffer_size)
+            if not chunk:
                 return
 
-        self.__stream.seek(-len(buffer), os.SEEK_CUR)
-        self.read_until(pattern)
+            buf = buf[-carry_len:] + chunk if carry_len else chunk
+
+        self.__stream.seek(-len(buf) + buf.find(pattern) + len(pattern), os.SEEK_CUR)
