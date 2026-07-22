@@ -24,5 +24,3 @@ parser.add_argument(
     type=str,
     help="Path to Commit.gitdeps.xml",
 )
-
-args = parser.parse_args()
