@@ -18,6 +18,12 @@ Repository = "https://github.com/sehnryr/get-oodle-lib"
 [project.scripts]
 get-oodle-lib = "get_oodle_lib.__main__:main"
 
+[tool.uv.sources]
+parse-commit-gitdeps-xml = { workspace = true }
+
+[tool.uv.workspace]
+members = ["packages/*"]
+
 [build-system]
 requires = ["uv_build>=0.11.31,<0.12"]
 build-backend = "uv_build"

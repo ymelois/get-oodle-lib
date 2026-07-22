@@ -2,6 +2,12 @@ version = 1
 revision = 3
 requires-python = ">=3.10"
 
+[manifest]
+members = [
+    "get-oodle-lib",
+    "parse-commit-gitdeps-xml",
+]
+
 [[package]]
 name = "get-oodle-lib"
 version = "0.2.0"
@@ -11,13 +17,9 @@ dependencies = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "parse-commit-gitdeps-xml", specifier = ">=0.1.0,<0.2.0" }]
+requires-dist = [{ name = "parse-commit-gitdeps-xml", editable = "packages/parse-commit-gitdeps-xml" }]
 
 [[package]]
 name = "parse-commit-gitdeps-xml"
 version = "0.1.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/36/6c/8cad5e810d89574a6430c96c240fce4ae41f7bd5bf764b9c2056e71026fa/parse_commit_gitdeps_xml-0.1.0.tar.gz", hash = "sha256:c8972d3cfb87062c593263fadb449cf1927eba7234a68dccc2e100c4ffdd2293", size = 15706, upload-time = "2024-03-28T01:33:13.268Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c7/ee/d0b3ece3ac726635cfe871505ae1ec9f22c14654a86f517d5e1084db6e0a/parse_commit_gitdeps_xml-0.1.0-py3-none-any.whl", hash = "sha256:304cc2ab759ddd26f4be7d0de3a2bf3d45d4abb58e518ae625a1978e837015ea", size = 17539, upload-time = "2024-03-28T01:33:10.965Z" },
-]
+source = { editable = "packages/parse-commit-gitdeps-xml" }

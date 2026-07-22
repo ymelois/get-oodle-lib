@@ -1,0 +1,17 @@
+[project]
+name = "parse-commit-gitdeps-xml"
+version = "0.1.0"
+description = "Parse Commit.gitdeps.xml file"
+license = "GPL-3.0-or-later"
+authors = [
+    { name = "Youn Mélois", email = "youn@melois.dev" },
+]
+readme = "README.md"
+requires-python = ">=3.10"
+
+[project.urls]
+Repository = "https://github.com/sehnryr/get-oodle-lib/tree/main/packages/parse-commit-gitdeps-xml"
+
+[build-system]
+requires = ["uv_build>=0.11.31,<0.12"]
+build-backend = "uv_build"
