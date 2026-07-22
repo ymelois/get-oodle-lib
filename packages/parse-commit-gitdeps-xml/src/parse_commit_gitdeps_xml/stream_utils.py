@@ -1,12 +1,12 @@
 import os
-from io import BufferedReader
+from typing import IO
 
 
 class StreamUtils:
-    __stream: BufferedReader
+    __stream: IO[bytes]
     __buffer_size: int = 1024 * 8
 
-    def __init__(self, stream: BufferedReader):
+    def __init__(self, stream: IO[bytes]):
         self.__stream = stream
 
     def __st_size(self) -> int:
