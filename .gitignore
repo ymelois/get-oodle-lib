@@ -1,3 +1,9 @@
+# Artifact from Unreal Engine to parse from
+Commit.gitdeps.xml
+
+# Output directory for CLI
+out/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
