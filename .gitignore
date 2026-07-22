@@ -163,3 +163,4 @@ cython_debug/
 .vscode/
 oo2core_win64_debug.lib
 oo2core_win64.lib
+*.lib

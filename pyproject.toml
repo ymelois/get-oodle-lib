@@ -10,7 +10,7 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
-    "parse-commit-gitdeps-xml>=0.1.0",
+    "parse-commit-gitdeps-xml>=0.1.1",
     "rich-click>=1.9.8",
 ]
 
