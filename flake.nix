@@ -30,6 +30,7 @@
         default = pkgs.mkShell {
           nativeBuildInputs = [
             pkgs.python3
+            pkgs.ruff
             pkgs.uv
           ];
 

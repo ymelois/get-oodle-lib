@@ -34,9 +34,10 @@ def main():
         file_prefix = b"Engine/Source/Runtime/OodleDataCompression/Sdks/"
         file_paths = gitdeps.find_file_names(file_prefix)
 
-        get_version = lambda name: tuple(
-            map(int, name[len(file_prefix) :].split(b"/", 1)[0].split(b"."))
-        )
+        def get_version(name):
+            return tuple(
+                map(int, name[len(file_prefix) :].split(b"/", 1)[0].split(b"."))
+            )
 
         # Get the latest version of the library
         versions = [get_version(file_path) for file_path in file_paths]
@@ -54,9 +55,9 @@ def main():
         target_libraries = [
             file_path
             for file_path in latest_files
-            if file_path[
-                len(file_prefix) + len(latest_version_text) + 1 :
-            ].startswith(b"lib/" + platform_map[args.platform].encode() + b"/")
+            if file_path[len(file_prefix) + len(latest_version_text) + 1 :].startswith(
+                b"lib/" + platform_map[args.platform].encode() + b"/"
+            )
         ]
 
         for file_path in target_libraries:

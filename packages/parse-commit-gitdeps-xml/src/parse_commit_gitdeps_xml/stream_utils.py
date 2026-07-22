@@ -29,7 +29,9 @@ class StreamUtils:
                 return buffer
 
         pattern_index = buffer[iterations * self.__buffer_size :].find(pattern)
-        self.__stream.seek(-(self.__buffer_size - pattern_index - len(pattern)), os.SEEK_CUR)
+        self.__stream.seek(
+            -(self.__buffer_size - pattern_index - len(pattern)), os.SEEK_CUR
+        )
         return buffer[: iterations * self.__buffer_size + pattern_index]
 
     def consume_until(
