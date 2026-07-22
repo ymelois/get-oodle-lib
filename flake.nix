@@ -30,7 +30,7 @@
         default = pkgs.mkShell {
           nativeBuildInputs = [
             pkgs.python3
-            pkgs.poetry
+            pkgs.uv
           ];
 
           # https://github.com/NixOS/nix/issues/12234
