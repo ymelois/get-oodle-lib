@@ -1,36 +1,22 @@
-[tool.poetry]
+[project]
 name = "get-oodle-lib"
-version = "0.2.0"
-description = "Get Oodle library for Unreal Engine"
+version = "1.0.0"
+description = ""
 license = "GPL-3.0-or-later"
-authors = ["Youn Mélois <youn@melois.dev>"]
+authors = [
+  { name = "Youn Mélois", email = "youn@melois.dev" },
+  { name = "Mythical-Github", email = "MythicalData@gmail.com" }
+]
 readme = "README.md"
-repository = "https://github.com/sehnryr/get-oodle-lib"
+requires-python = ">=3.14"
+dependencies = [
+    "parse-commit-gitdeps-xml>=0.1.0",
+    "rich-click>=1.9.8",
+]
 
-
-[tool.poetry.dependencies]
-python = "^3.10"
-parse-commit-gitdeps-xml = "^0.1.0"
-
-
-[tool.poetry.group.dev.dependencies]
-poethepoet = "^0.24.4"
-black = "^23.12.1"
-isort = "^5.13.2"
-pytest = "^7.4.4"
-
-
-[tool.poetry.scripts]
+[project.scripts]
 get_oodle_lib = "get_oodle_lib.__main__:main"
 
-
-[tool.poe.tasks]
-black = "black --line-length=80 ./get_oodle_lib"
-isort = "isort --profile=black --line-length=80 ./get_oodle_lib"
-format = ["black", "isort"]
-test = "pytest ./tests"
-
-
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build>=0.9.26,<0.10.0"]
+build-backend = "uv_build"

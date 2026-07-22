@@ -1,36 +1,12 @@
-import os
+from get_oodle_lib.data_structures import Platform, platform_map
+
 from pathlib import Path
 
 from parse_commit_gitdeps_xml import CommitGitdepsXML
 
-from get_oodle_lib.common import parser
 
-
-def main():
-    args = parser.parse_args()
-
-    # Check if the gitdeps's path is valid and exists
-    if not os.path.isfile(args.gitdeps):
-        print("Invalid path to Commit.gitdeps.xml")
-        exit(1)
-
-    # Check if the output path is valid and exists else create it
-    if not os.path.isdir(args.output):
-        try:
-            path = Path(args.output)
-            path.mkdir(parents=True)
-        except OSError:
-            print("Invalid path to output directory")
-            exit(1)
-
-    platform_map = {
-        "windows": "Win64",
-        "linux": "Linux",
-        "mac": "Mac",
-    }
-
-    # Parse the Commit.gitdeps.xml
-    with CommitGitdepsXML(args.gitdeps) as gitdeps:
+def get_oodle_lib(output: Path, gitdeps_path: Path, platform: Platform) -> None:
+    with CommitGitdepsXML(str(gitdeps_path)) as gitdeps:
         file_prefix = b"Engine/Source/Runtime/OodleDataCompression/Sdks/"
         file_paths = gitdeps.find_file_names(file_prefix)
 
@@ -56,16 +32,12 @@ def main():
             for file_path in latest_files
             if file_path[
                 len(file_prefix) + len(latest_version_text) + 1 :
-            ].startswith(b"lib/" + platform_map[args.platform].encode() + b"/")
+            ].startswith(b"lib/" + platform_map[platform.value].encode() + b"/")
         ]
 
         for file_path in target_libraries:
             file_name = file_path.rsplit(b"/", 1)[-1].decode()
 
-            with open(f"{args.output}/{file_name}", "wb") as f:
+            with open(f"{output}/{file_name}", "wb") as f:
                 print(f"Writing {file_name}...")
                 f.write(gitdeps.fetch_file(file_path))
-
-
-if __name__ == "__main__":
-    main()
