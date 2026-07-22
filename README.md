@@ -8,7 +8,16 @@ A library for getting the oodle library from Unreal Engine source code.
 
 ## Install
 
-Install the package with `pipx install git+https://github.com/sehnryr/get-oodle-lib` and run it with `get-oodle-lib`.
+```bash
+# Install it either from PyPI or GitHub
+uv tool install get_oodle_lib@latest
+uv tool install git+https://github.com/sehnryr/get-oodle-lib
+# then run
+get_oodle_lib --help
+# Or use uvx
+uvx get_oodle_lib@latest --help
+uvx --from git+https://github.com/sehnryr/get-oodle-lib get-oodle-lib --help
+```
 
 ## Usage
 
