@@ -1,6 +1,6 @@
 [project]
 name = "get-oodle-lib"
-version = "0.2.0"
+version = "0.2.1"
 description = "Get Oodle library for Unreal Engine"
 license = "MIT OR Apache-2.0"
 authors = [
@@ -9,7 +9,7 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
-    "parse-commit-gitdeps-xml>=0.1.0,<0.2.0",
+    "parse-commit-gitdeps-xml>=0.1.1,<0.2.0",
 ]
 
 [project.urls]
