@@ -22,15 +22,18 @@ class StreamUtils:
             return buffer
 
         iterations = 0
+        last_chunk_size = len(buffer)
         while pattern not in buffer[iterations * self.__buffer_size :]:
             iterations += 1
-            buffer += self.__stream.read(self.__buffer_size)
-            if len(buffer[iterations * self.__buffer_size :]) < self.__buffer_size:
+            chunk = self.__stream.read(self.__buffer_size)
+            last_chunk_size = len(chunk)
+            buffer += chunk
+            if last_chunk_size < self.__buffer_size:
                 return buffer
 
         pattern_index = buffer[iterations * self.__buffer_size :].find(pattern)
         self.__stream.seek(
-            -(self.__buffer_size - pattern_index - len(pattern)), os.SEEK_CUR
+            -(last_chunk_size - pattern_index - len(pattern)), os.SEEK_CUR
         )
         return buffer[: iterations * self.__buffer_size + pattern_index]
 
@@ -47,5 +50,5 @@ class StreamUtils:
             if not buffer:
                 return
 
-        self.__stream.seek(-self.__buffer_size, os.SEEK_CUR)
+        self.__stream.seek(-len(buffer), os.SEEK_CUR)
         self.read_until(pattern)
