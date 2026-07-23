@@ -7,7 +7,7 @@ authors = [
     { name = "Youn Mélois", email = "youn@melois.dev" },
 ]
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     "parse-commit-gitdeps-xml>=0.1.1,<0.2.0",
 ]

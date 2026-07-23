@@ -1,5 +1,5 @@
 # Artifact from Unreal Engine to parse from
-Commit.gitdeps.xml
+Commit.gitdeps.xml*
 
 # Output directory for CLI
 out/

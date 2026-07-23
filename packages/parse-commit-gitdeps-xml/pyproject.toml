@@ -7,7 +7,7 @@ authors = [
     { name = "Youn Mélois", email = "youn@melois.dev" },
 ]
 readme = "README.md"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 
 [project.urls]
 Repository = "https://github.com/sehnryr/get-oodle-lib/tree/main/packages/parse-commit-gitdeps-xml"
