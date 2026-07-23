@@ -1,6 +1,6 @@
 [project]
 name = "get-oodle-lib"
-version = "0.2.1"
+version = "0.3.0"
 description = "Get Oodle library for Unreal Engine"
 license = "MIT OR Apache-2.0"
 authors = [
