@@ -1,5 +1,6 @@
 import argparse
 import os
+import sys
 from enum import StrEnum
 from pathlib import Path
 
@@ -77,7 +78,7 @@ def main():
 
     # Check if the gitdeps's path is valid and exists
     if not os.path.isfile(args.gitdeps):
-        print("Invalid path to Commit.gitdeps.xml")
+        print("Invalid path to Commit.gitdeps.xml", file=sys.stderr)
         exit(1)
 
     # Check if the output path is valid and exists else create it
@@ -86,7 +87,7 @@ def main():
             path = Path(args.output)
             path.mkdir(parents=True)
         except OSError:
-            print("Invalid path to output directory")
+            print("Invalid path to output directory", file=sys.stderr)
             exit(1)
 
     # Parse the Commit.gitdeps.xml
@@ -101,6 +102,11 @@ def main():
             for file_prefix in file_prefixes
             for file_path in gitdeps.find_file_names(file_prefix)
         ]
+
+        if not files:
+            # This is likely due to the files being stored elsewhere between archive versions
+            print("Oodle libraries not found", file=sys.stderr)
+            exit(1)
 
         # Get the latest version of the library
         versions = map(lambda x: x.get_version(), files)
